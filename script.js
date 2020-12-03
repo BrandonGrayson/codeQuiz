@@ -5,6 +5,13 @@ let titleEl = document.querySelector('#title')
 let h1Text = document.querySelector('#title')
 let pTextEl = document.querySelector('#pText')
 let buttonEl = document.querySelector('#start')
+// access the time container div
+let timeContainer = document.querySelector('#timeContainer')
+// move the container to the top right corner
+    //margin padding set attribute?
+timeContainer.style.position = 'absolute';
+timeContainer.style.top = 0;
+timeContainer.style.left = '90%';
 
 // Timer variable
 let timer = 5;
