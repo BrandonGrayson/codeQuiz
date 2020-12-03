@@ -2,7 +2,10 @@
 let startBtn = document.querySelector('#start')
 let timerEl = document.querySelector('#timer')
 let titleEl = document.querySelector('#title')
-let h1Text = document.querySelector('#title').textContent
+let h1Text = document.querySelector('#title')
+let pTextEl = document.querySelector('#pText')
+let buttonEl = document.querySelector('#start')
+
 
 // when the Start Quiz button is pressed
 startBtn.addEventListener('click', function () {
@@ -10,8 +13,8 @@ startBtn.addEventListener('click', function () {
     console.log('Quiz has been started')
     // clear the text content of h1 element
     h1Text.textContent = '';
-
-
+    pTextEl.textContent = '';
+    buttonEl.textContent = '';
 });
 // the timer should start at 60 and count down
 // we should display the first question to the user
