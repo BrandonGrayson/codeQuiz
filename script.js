@@ -6,6 +6,10 @@ let h1Text = document.querySelector('#title')
 let pTextEl = document.querySelector('#pText')
 let buttonEl = document.querySelector('#start')
 
+// Timer variable
+let timer = 5;
+
+
 
 // when the Start Quiz button is pressed
 startBtn.addEventListener('click', function () {
@@ -15,8 +19,31 @@ startBtn.addEventListener('click', function () {
     h1Text.textContent = '';
     pTextEl.textContent = '';
     buttonEl.textContent = '';
+    // the timer should start at 60 and count down
+
+    var setTimerText = function () {
+        timerEl.textContent = 'Time: ' + timer;
+        if (timer === 0) {
+            clearInterval(timerTick)
+        }
+        timer--;
+        // if statement to stop timer at 0
+
+    }
+
+
+    const timerTick = setInterval(setTimerText, 1000)
+
+
+
+    //timers
+    //setInterval
+    //does things ever X ms (1second == 1000ms)
+    //setTimeout
+    //does a thing after X ms
+
 });
-// the timer should start at 60 and count down
+
 // we should display the first question to the user
 
 
@@ -47,4 +74,26 @@ startBtn.addEventListener('click', function () {
 
 // then display all done! Final score is __, a textbox for their initials
 
+// loop through array of objects
 
+// creating an element to store the question
+
+// creating an element to store button that user could press
+
+// possible answers stored in an array of objects
+
+// event.target.value
+
+// boolean value that has like isCorrent to store the data for correct answer
+// access question[1]
+
+// var questions = [
+//     {
+//        question: 'What is a commonly used data type?',
+//        answers: 
+//     },
+//     {
+
+//     }.
+// ]
+ 
