@@ -1,24 +1,51 @@
-// Select Variables
+// Select Variables ===========================================================================
 let startBtn = document.querySelector('#start')
 let timerEl = document.querySelector('#timer')
 let titleEl = document.querySelector('#title')
 let h1Text = document.querySelector('#title')
 let pTextEl = document.querySelector('#pText')
 let buttonEl = document.querySelector('#start')
-// access the time container div
+// access the time container div=================================================================
 let timeContainer = document.querySelector('#timeContainer')
 // move the container to the top right corner
-    //margin padding set attribute?
 timeContainer.style.position = 'absolute';
 timeContainer.style.top = 0;
 timeContainer.style.left = '90%';
 
-// Timer variable
+// Timer variable =================================================================================
 let timer = 5;
 
+// after button is clicked 
+// iterate through an array of questions
+// select a question
+// display that value to the screen
+// 
 
+// An Array of Questions and Answers ===================================================================
+var questions = [
+    {
+       question: 'Commonly used data types do not include?',
+       answers: 'Strings',
+       answers: 'Booleans',
+       answers: 'Alerts',
+       answers: 'Numbers'
+    },
+    {
+        question: 'The condition in an if else statement is enclosed within?',
+        answers: 'Quotes',
+        answers: 'Curly Brackets',
+        answers: 'Parenthesis'
+    },
+    {
+        question: 'Arrays in javascript are used to store what?',
+        answers: 'Numbers and strings',
+        answers: 'Other arrays',
+        answers: 'booleans',
+        answers: 'All the above'
+    },
+]
 
-// when the Start Quiz button is pressed
+// when the Start Quiz button is pressed===============================================
 startBtn.addEventListener('click', function () {
     // console.log 
     console.log('Quiz has been started')
@@ -94,13 +121,5 @@ startBtn.addEventListener('click', function () {
 // boolean value that has like isCorrent to store the data for correct answer
 // access question[1]
 
-// var questions = [
-//     {
-//        question: 'What is a commonly used data type?',
-//        answers: 
-//     },
-//     {
 
-//     }.
-// ]
  
