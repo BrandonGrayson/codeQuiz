@@ -1,34 +1,37 @@
-// Select Variables ===========================================================================
+// // Select Variables ===========================================================================
 let startBtn = document.querySelector('#start')
 let timerEl = document.querySelector('#timer')
 let titleEl = document.querySelector('#title')
 let h1Text = document.querySelector('#title')
 let pTextEl = document.querySelector('#pText')
 let buttonEl = document.querySelector('#start')
-// access the time container div=================================================================
-let timeContainer = document.querySelector('#timeContainer')
-// move the container to the top right corner
-timeContainer.style.position = 'absolute';
-timeContainer.style.top = 0;
-timeContainer.style.left = '90%';
+let beginningScreen = document.querySelector('#beginningScreen')
+// Set the Display Screen to question and answer section
+let questionAndAnswerCard = document.querySelector('questionAndAnswerCard')
 
-// Timer variable =================================================================================
-let timer = 5;
 
-// after button is clicked 
-// iterate through an array of questions
-// select a question
-// display that value to the screen
-// 
+// // access the time container div=================================================================
+// // let timeContainer = document.querySelector('#timeContainer')
+// // move the container to the top right corner
+// // timeContainer.style.position = 'absolute';
+// // timeContainer.style.top = 0;
+// // timeContainer.style.left = '90%';
 
-// An Array of Questions and Answers ===================================================================
-var questions = [
+// // Timer variable =================================================================================
+// let timer = 5;
+
+// // after button is clicked 
+// // iterate through an array of questions
+// // select a question
+// // display that value to the screen
+// // 
+
+// // An Array of Questions and Answers ===================================================================
+var questionsArray = [
     {
        question: 'Commonly used data types do not include?',
-       answers: 'Strings',
-       answers: 'Booleans',
-       answers: 'Alerts',
-       answers: 'Numbers'
+       answers: ['Strings', 'Booleans','Alerts','Numbers'],
+       correctAnswer: 'Alerts'
     },
     {
         question: 'The condition in an if else statement is enclosed within?',
@@ -45,38 +48,39 @@ var questions = [
     },
 ]
 
-// when the Start Quiz button is pressed===============================================
+// // when the Start Quiz button is pressed===============================================
 startBtn.addEventListener('click', function () {
     // console.log 
     console.log('Quiz has been started')
     // clear the text content of h1 element
-    h1Text.textContent = '';
-    pTextEl.textContent = '';
-    buttonEl.textContent = '';
     // the timer should start at 60 and count down
 
     var setTimerText = function () {
         timerEl.textContent = 'Time: ' + timer;
         if (timer === 0) {
             clearInterval(timerTick)
+            return;
         }
         timer--;
         // if statement to stop timer at 0
 
     }
+    beginningScreen.setAttribute('style', 'display: none')
+    
 
+})  
+//     const timerTick = setInterval(setTimerText, 1000)
 
-    const timerTick = setInterval(setTimerText, 1000)
+//     // after button create an h1 element to store the question in
+//     // let question1Tag = document.createElement('h1')
+//     // // set the text content equal to the text in the array
+//     // let questionA = '';
+//     // questionA = questionsArray[0]
+//     // console.log(questionA)
+//     // question1Tag.textContent = questionA
+//     // document.body.append(question1Tag)
 
-
-
-    //timers
-    //setInterval
-    //does things ever X ms (1second == 1000ms)
-    //setTimeout
-    //does a thing after X ms
-
-});
+// });
 
 // we should display the first question to the user
 
@@ -120,6 +124,3 @@ startBtn.addEventListener('click', function () {
 
 // boolean value that has like isCorrent to store the data for correct answer
 // access question[1]
-
-
- 
