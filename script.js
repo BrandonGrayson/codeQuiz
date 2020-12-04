@@ -1,13 +1,18 @@
 // // Select Variables ===========================================================================
 let startBtn = document.querySelector('#start')
 let timerEl = document.querySelector('#timer')
-let titleEl = document.querySelector('#title')
-let h1Text = document.querySelector('#title')
-let pTextEl = document.querySelector('#pText')
 let buttonEl = document.querySelector('#start')
 let beginningScreen = document.querySelector('#beginningScreen')
+// let questionText = document.querySelector
 // Set the Display Screen to question and answer section
-let questionAndAnswerCard = document.querySelector('questionAndAnswerCard')
+let questionAndAnswerCard = document.querySelector('#questionAndAnswerCard')
+let printQuestionEl = document.querySelector('#questionsWillGoHere')
+let printAnswerEl = document.querySelector('#answersGoHere')
+
+
+// Keep Track of Question =========
+let questionIndex = 0;
+// let hiddenEl = document.querySelector('#questionAndAnswerCard')
 
 
 // // access the time container div=================================================================
@@ -35,16 +40,11 @@ var questionsArray = [
     },
     {
         question: 'The condition in an if else statement is enclosed within?',
-        answers: 'Quotes',
-        answers: 'Curly Brackets',
-        answers: 'Parenthesis'
+        answers: ['Quotes','Curly Brackets','Parenthesis']
     },
     {
         question: 'Arrays in javascript are used to store what?',
-        answers: 'Numbers and strings',
-        answers: 'Other arrays',
-        answers: 'booleans',
-        answers: 'All the above'
+        answers: ['Numbers and strings','Other arrays','booleans','All the above']
     },
 ]
 
@@ -54,73 +54,43 @@ startBtn.addEventListener('click', function () {
     console.log('Quiz has been started')
     // clear the text content of h1 element
     // the timer should start at 60 and count down
-
-    var setTimerText = function () {
-        timerEl.textContent = 'Time: ' + timer;
-        if (timer === 0) {
-            clearInterval(timerTick)
-            return;
-        }
-        timer--;
-        // if statement to stop timer at 0
-
-    }
     beginningScreen.setAttribute('style', 'display: none')
-    
-
+    questionAndAnswerCard.classList.remove('hidden')
 })  
-//     const timerTick = setInterval(setTimerText, 1000)
-
-//     // after button create an h1 element to store the question in
-//     // let question1Tag = document.createElement('h1')
-//     // // set the text content equal to the text in the array
-//     // let questionA = '';
-//     // questionA = questionsArray[0]
-//     // console.log(questionA)
-//     // question1Tag.textContent = questionA
-//     // document.body.append(question1Tag)
-
-// });
-
-// we should display the first question to the user
 
 
+var setTimerText = function () {
+    timerEl.textContent = 'Time: ' + timer;
+    if (timer === 0) {
+        clearInterval(timerTick)
+        return;
+    }
+    timer--;
+    // if statement to stop timer at 0
+}
 
-// we want to take the user from the home screen to 
+// put question at the index of 0 on the page
+let questionHeadline = document.createElement('h1')
+questionHeadline.textContent = questionsArray[questionIndex].question
+printQuestionEl.appendChild(questionHeadline)
 
-// a page where they can see there first question
+// append the answers to the page
+// create the element they'll be in ul
 
-// there should be a collection of possible answers either an array or an object
+//loop over the answers / questionsArray[quesitonIndex].answers
+let possibleAnswers = document.getElementById('answers-container')
 
-// if a user selects a correct answer to a question 
+const answersArray = questionsArray[questionIndex].answers
+const currentQuestion = questionsArray[questionIndex].question
 
-// diplay a message saying correct
+for (let i = 0; i < answersArray.length; i++) {
+    // create an element for the li data
+    let answerText = document.createElement('li')
+    answerText.textContent = answersArray[i]
+    answerText.classList.add('answer-button')
+    answerText.addEventListener('click', function(event){
+        console.log(event.target.innerHTML)
+    })
+    possibleAnswers.appendChild(answerText)
+}
 
-// timer continues to countdown as normal
-
-// a new question is loaded 
-
-// else if the user selects a wrong answer
-
-// then we will subtract 10 seconds from timer
-
-// display a message saying Incorrect to the user
-
-// then move onto next question
-
-// if the user answer all the questions 
-
-// then display all done! Final score is __, a textbox for their initials
-
-// loop through array of objects
-
-// creating an element to store the question
-
-// creating an element to store button that user could press
-
-// possible answers stored in an array of objects
-
-// event.target.value
-
-// boolean value that has like isCorrent to store the data for correct answer
-// access question[1]
