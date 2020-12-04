@@ -10,6 +10,8 @@ let questionAndAnswerCard = document.querySelector('#questionAndAnswerCard')
 let printQuestionEl = document.querySelector('#questionsWillGoHere')
 let printAnswerEl = document.querySelector('#answersGoHere')
 
+let endGameDiv = document.querySelector('#end-game')
+
 let answerText;
 
 // Keep Track of Question =========
@@ -53,8 +55,12 @@ function startGame () {
     appendQuestion();
 }
 
-endGame()
+
 function appendQuestion () {
+    if (questionIndex === questionsArray.length) {
+        endGame()       
+        // remove the clas
+    }
     // create an h1 element set it to a variable
     let questionHeadline = document.createElement('h1')
     // set the text content = to questionsArray at the questionIndex of question
@@ -105,8 +111,8 @@ function appendQuestion () {
                 answersArray = ''
                 questionHeadline.innerHTML = ''
                 //currentQuestion++
-                //endGame()
             }
+            
                         
         })
         possibleAnswers.appendChild(answerText)
@@ -116,6 +122,8 @@ function appendQuestion () {
 
 function endGame () {
    questionAndAnswerCard.classList.add('hidden')
+   endGameDiv.classList.remove('hidden')
+
 }
 
 function scoreTracker  () {
