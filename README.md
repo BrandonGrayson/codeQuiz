@@ -1,1 +1,3 @@
 # codeQuiz
+
+## Installation

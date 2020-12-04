@@ -60,18 +60,19 @@ function appendQuestion () {
     questionHeadline.textContent = questionsArray[questionIndex].question
     // append questionheadline text at the printQuestionEl
     printQuestionEl.appendChild(questionHeadline)
-
+    console.log(questionIndex)
 
     // append the answers to the page
     // create the element they'll be in ul
     //loop over the answers / questionsArray[quesitonIndex].answers
     let possibleAnswers = document.getElementById('answers-container')
+    
 
     let answersArray = questionsArray[questionIndex].answers
     let currentQuestion = questionsArray[questionIndex].question
     let correctAnswer = questionsArray[questionIndex].correctAnswer
     possibleAnswers.innerHTML = ''
-    //if () {
+    console.log('currentQuestion ', currentQuestion)
         for (let i = 0; i < answersArray.length; i++) {
             // create an element for the li data
             answerText = document.createElement('li')
@@ -81,27 +82,30 @@ function appendQuestion () {
             // give the answer text some styling classes
             answerText.classList.add('answer-button')
             answerText.addEventListener('click', function(event){
+                console.log(event)
                     console.log(event.target.innerText)
                     //console.log(answerText.textContent)
                     console.log('correctanswer: ', correctAnswer)
                 if (event.target.innerText === correctAnswer) {
                 console.log('Correct Answer!')
+                questionIndex++
                 appendQuestion()
                     score ++
                     questionHeadline.innerHTML = ''
                     answersArray = ''
-                    currentQuestion++
-                    questionIndex++
+                    //currentQuestion++
+                    
                     printQuestionEl.removeChild(questionHeadline)
                     //correctAnswer.classList.remove('hidden')
                 } else {
                     //console.log('wrong answer')
+                    questionIndex++
                     appendQuestion()
                     score --
                     answersArray = ''
                     questionHeadline.innerHTML = ''
-                    currentQuestion++
-                    questionIndex++
+                    //currentQuestion++
+                    
                 }            
             })
             possibleAnswers.appendChild(answerText)
@@ -109,8 +113,11 @@ function appendQuestion () {
     
 }
 
+function endGame () {
+    
+}
 
-let scoreTracker = function () {
+function scoreTracker  () {
     pageScore.textContent = 'Score: ' + score
 
 }
