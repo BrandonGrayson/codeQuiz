@@ -53,6 +53,7 @@ function startGame () {
     appendQuestion();
 }
 
+endGame()
 function appendQuestion () {
     // create an h1 element set it to a variable
     let questionHeadline = document.createElement('h1')
@@ -72,49 +73,49 @@ function appendQuestion () {
     let currentQuestion = questionsArray[questionIndex].question
     let correctAnswer = questionsArray[questionIndex].correctAnswer
     possibleAnswers.innerHTML = ''
-    console.log('currentQuestion ', currentQuestion)
-        for (let i = 0; i < answersArray.length; i++) {
-            // create an element for the li data
-            answerText = document.createElement('li')
-            //li data is answers array [i]
-            answerText.textContent = answersArray[i]
-            answerText.setAttribute("value", "answersArray[i]")
-            // give the answer text some styling classes
-            answerText.classList.add('answer-button')
-            answerText.addEventListener('click', function(event){
-                console.log(event)
-                    console.log(event.target.innerText)
-                    //console.log(answerText.textContent)
-                    console.log('correctanswer: ', correctAnswer)
-                if (event.target.innerText === correctAnswer) {
-                console.log('Correct Answer!')
+    for (let i = 0; i < answersArray.length; i++) {
+        // create an element for the li data
+        answerText = document.createElement('li')
+        //li data is answers array [i]
+        answerText.textContent = answersArray[i]
+        answerText.setAttribute("value", "answersArray[i]")
+        // give the answer text some styling classes
+        answerText.classList.add('answer-button')
+        answerText.addEventListener('click', function(event){
+            console.log(event)
+                console.log(event.target.innerText)
+                //console.log(answerText.textContent)
+                console.log('correctanswer: ', correctAnswer)
+            if (event.target.innerText === correctAnswer) {
+            console.log('Correct Answer!')
+            questionIndex++
+            appendQuestion()
+                score ++
+                questionHeadline.innerHTML = ''
+                answersArray = ''
+                //currentQuestion++
+                
+                printQuestionEl.removeChild(questionHeadline)
+                //correctAnswer.classList.remove('hidden')
+            } else {
+                //console.log('wrong answer')
                 questionIndex++
                 appendQuestion()
-                    score ++
-                    questionHeadline.innerHTML = ''
-                    answersArray = ''
-                    //currentQuestion++
-                    
-                    printQuestionEl.removeChild(questionHeadline)
-                    //correctAnswer.classList.remove('hidden')
-                } else {
-                    //console.log('wrong answer')
-                    questionIndex++
-                    appendQuestion()
-                    score --
-                    answersArray = ''
-                    questionHeadline.innerHTML = ''
-                    //currentQuestion++
-                    
-                }            
-            })
-            possibleAnswers.appendChild(answerText)
-        }
+                score --
+                answersArray = ''
+                questionHeadline.innerHTML = ''
+                //currentQuestion++
+                //endGame()
+            }
+                        
+        })
+        possibleAnswers.appendChild(answerText)
+    }
     
 }
 
 function endGame () {
-    
+   questionAndAnswerCard.classList.add('hidden')
 }
 
 function scoreTracker  () {
