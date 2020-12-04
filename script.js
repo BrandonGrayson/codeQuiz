@@ -3,14 +3,18 @@ let startBtn = document.querySelector('#start')
 let timerEl = document.querySelector('#timer')
 let buttonEl = document.querySelector('#start')
 let beginningScreen = document.querySelector('#beginningScreen')
+let pageScore = document.querySelector('#score')
 // let questionText = document.querySelector
 // Set the Display Screen to question and answer section
 let questionAndAnswerCard = document.querySelector('#questionAndAnswerCard')
 let printQuestionEl = document.querySelector('#questionsWillGoHere')
 let printAnswerEl = document.querySelector('#answersGoHere')
 
+let answerText;
+
 // Keep Track of Question =========
 let questionIndex = 0;
+let score = 0;
 // let hiddenEl = document.querySelector('#questionAndAnswerCard')
 
 // // Timer variable =================================================================================
@@ -32,7 +36,7 @@ var questionsArray = [
     {
         question: 'Arrays in javascript are used to store what?',
         answers: ['Numbers and strings','Other arrays','booleans','All the above'],
-        correctAnswer: ''
+        correctAnswer: 'All the above'
     },
 ]
 
@@ -42,16 +46,19 @@ startBtn.addEventListener('click', startGame)
 
 function startGame () {
     // console.log 
-    console.log('Quiz has been started')
+    // console.log('Quiz has been started')
     // clear the text content of h1 element
     beginningScreen.setAttribute('style', 'display: none')
     questionAndAnswerCard.classList.remove('hidden')
+    appendQuestion();
 }
 
-
-// put question at the index of 0 on the page
+function appendQuestion () {
+    // create an h1 element set it to a variable
 let questionHeadline = document.createElement('h1')
+    // set the text content = to questionsArray at the questionIndex of question
 questionHeadline.textContent = questionsArray[questionIndex].question
+// append questionheadline text at the printQuestionEl
 printQuestionEl.appendChild(questionHeadline)
 
 
@@ -62,30 +69,52 @@ let possibleAnswers = document.getElementById('answers-container')
 
 let answersArray = questionsArray[questionIndex].answers
 let currentQuestion = questionsArray[questionIndex].question
-let correctAnswer = questionsArray[0].correctAnswer
+let correctAnswer = questionsArray[questionIndex].correctAnswer
 
-for (let i = 0; i < answersArray.length; i++) {
-    // create an element for the li data
-    let answerText = document.createElement('li')
-    //li data is answers array [i]
-    answerText.textContent = answersArray[i]
-    // give the answer text some styling classes
-    answerText.classList.add('answer-button')
+    for (let i = 0; i < answersArray.length; i++) {
+        // create an element for the li data
+        answerText = document.createElement('li')
+        //li data is answers array [i]
+        answerText.textContent = answersArray[i]
+        answerText.setAttribute("value", "answersArray[i]")
+        // give the answer text some styling classes
+        answerText.classList.add('answer-button')
+        answerText.addEventListener('click', function(event){
+                console.log(event.target.innerHTML)
+                console.log(answerText.textContent)
+                //console.log(correctAnswer)
+            if (answerText.textContent === correctAnswer) {
+               // console.log('Correct Answer!')
+                score ++
+                questionHeadline.innerHTML = ''
+                currentQuestion++
+                questionIndex++
+                printQuestionEl.removeChild(questionHeadline)
 
-    answerText.addEventListener('click', function(event){
-        if (answerText.textContent === correctAnswer) {
-            console.log('Correct Answer!')
-        } else {
-            console.log('wrong answer')
-        }
-        event.stopPropagation()
-        console.log(event.target.innerHTML)
-    })
-    possibleAnswers.appendChild(answerText)
+                appendQuestion()
+        
+                //correctAnswer.classList.remove('hidden')
+            } else {
+                //console.log('wrong answer')
+                score --
+                printQuestionEl.removeChild(questionHeadline)
+                currentQuestion++
+                questionIndex++
+                appendQuestion()
+            }
+            
+        })
+
+        
+        possibleAnswers.appendChild(answerText)
+    }
 }
 
 
+let scoreTracker = function () {
+    pageScore.textContent = 'Score: ' + score
 
+}
 
 
 
