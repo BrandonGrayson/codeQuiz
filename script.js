@@ -55,58 +55,58 @@ function startGame () {
 
 function appendQuestion () {
     // create an h1 element set it to a variable
-let questionHeadline = document.createElement('h1')
+    let questionHeadline = document.createElement('h1')
     // set the text content = to questionsArray at the questionIndex of question
-questionHeadline.textContent = questionsArray[questionIndex].question
-// append questionheadline text at the printQuestionEl
-printQuestionEl.appendChild(questionHeadline)
+    questionHeadline.textContent = questionsArray[questionIndex].question
+    // append questionheadline text at the printQuestionEl
+    printQuestionEl.appendChild(questionHeadline)
 
 
-// append the answers to the page
-// create the element they'll be in ul
-//loop over the answers / questionsArray[quesitonIndex].answers
-let possibleAnswers = document.getElementById('answers-container')
+    // append the answers to the page
+    // create the element they'll be in ul
+    //loop over the answers / questionsArray[quesitonIndex].answers
+    let possibleAnswers = document.getElementById('answers-container')
 
-let answersArray = questionsArray[questionIndex].answers
-let currentQuestion = questionsArray[questionIndex].question
-let correctAnswer = questionsArray[questionIndex].correctAnswer
-
-    for (let i = 0; i < answersArray.length; i++) {
-        // create an element for the li data
-        answerText = document.createElement('li')
-        //li data is answers array [i]
-        answerText.textContent = answersArray[i]
-        answerText.setAttribute("value", "answersArray[i]")
-        // give the answer text some styling classes
-        answerText.classList.add('answer-button')
-        answerText.addEventListener('click', function(event){
-                console.log(event.target.innerText)
-                //console.log(answerText.textContent)
-                console.log('correctanswer: ', correctAnswer)
-            if (event.target.innerText === correctAnswer) {
-               console.log('Correct Answer!')
-                score ++
-                questionHeadline.innerHTML = ''
-                currentQuestion++
-                questionIndex++
-                printQuestionEl.removeChild(questionHeadline)
+    let answersArray = questionsArray[questionIndex].answers
+    let currentQuestion = questionsArray[questionIndex].question
+    let correctAnswer = questionsArray[questionIndex].correctAnswer
+    possibleAnswers.innerHTML = ''
+    //if () {
+        for (let i = 0; i < answersArray.length; i++) {
+            // create an element for the li data
+            answerText = document.createElement('li')
+            //li data is answers array [i]
+            answerText.textContent = answersArray[i]
+            answerText.setAttribute("value", "answersArray[i]")
+            // give the answer text some styling classes
+            answerText.classList.add('answer-button')
+            answerText.addEventListener('click', function(event){
+                    console.log(event.target.innerText)
+                    //console.log(answerText.textContent)
+                    console.log('correctanswer: ', correctAnswer)
+                if (event.target.innerText === correctAnswer) {
+                console.log('Correct Answer!')
                 appendQuestion()
-        
-                //correctAnswer.classList.remove('hidden')
-            } else {
-                //console.log('wrong answer')
-                score --
-                printQuestionEl.removeChild(questionHeadline)
-                currentQuestion++
-                questionIndex++
-                appendQuestion()
-            }
-            
-        })
-
-        
-        possibleAnswers.appendChild(answerText)
-    }
+                    score ++
+                    questionHeadline.innerHTML = ''
+                    answersArray = ''
+                    currentQuestion++
+                    questionIndex++
+                    printQuestionEl.removeChild(questionHeadline)
+                    //correctAnswer.classList.remove('hidden')
+                } else {
+                    //console.log('wrong answer')
+                    appendQuestion()
+                    score --
+                    answersArray = ''
+                    questionHeadline.innerHTML = ''
+                    currentQuestion++
+                    questionIndex++
+                }            
+            })
+            possibleAnswers.appendChild(answerText)
+        }
+    
 }
 
 
