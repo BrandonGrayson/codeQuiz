@@ -80,17 +80,16 @@ let correctAnswer = questionsArray[questionIndex].correctAnswer
         // give the answer text some styling classes
         answerText.classList.add('answer-button')
         answerText.addEventListener('click', function(event){
-                console.log(event.target.innerHTML)
-                console.log(answerText.textContent)
-                //console.log(correctAnswer)
-            if (answerText.textContent === correctAnswer) {
-               // console.log('Correct Answer!')
+                console.log(event.target.innerText)
+                //console.log(answerText.textContent)
+                console.log('correctanswer: ', correctAnswer)
+            if (event.target.innerText === correctAnswer) {
+               console.log('Correct Answer!')
                 score ++
                 questionHeadline.innerHTML = ''
                 currentQuestion++
                 questionIndex++
                 printQuestionEl.removeChild(questionHeadline)
-
                 appendQuestion()
         
                 //correctAnswer.classList.remove('hidden')
