@@ -9,6 +9,7 @@ let pageScore = document.querySelector('#score')
 let questionAndAnswerCard = document.querySelector('#questionAndAnswerCard')
 let printQuestionEl = document.querySelector('#questionsWillGoHere')
 let printAnswerEl = document.querySelector('#answersGoHere')
+let submitForm = document.querySelector('#submit-form')
 
 let endGameDiv = document.querySelector('#end-game')
 
@@ -20,7 +21,7 @@ let score = 0;
 // let hiddenEl = document.querySelector('#questionAndAnswerCard')
 
 // // Timer variable =================================================================================
-// let timer = 5;
+let timer = 15;
 
 // the timer should start at 60 and count down
 // // An Array of Questions and Answers ===================================================================
@@ -41,10 +42,15 @@ var questionsArray = [
         correctAnswer: 'All the above'
     },
 ]
-
+// Event Listeners ====================================================
 // // when the Start Quiz button is pressed===============================================
 // call the start game function
 startBtn.addEventListener('click', startGame)  
+
+submitForm.addEventListener('click', function (event) {
+    event.preventDefault()
+    console.log('Form was Submitted')
+})
 
 function startGame () {
     // console.log 
@@ -53,10 +59,15 @@ function startGame () {
     beginningScreen.setAttribute('style', 'display: none')
     questionAndAnswerCard.classList.remove('hidden')
     appendQuestion();
+    setTimerText();
+    scoreTracker()
 }
 
 
 function appendQuestion () {
+    if (timer === 0) {
+        endGame()
+    }
     if (questionIndex === questionsArray.length) {
         endGame()       
         // remove the clas
@@ -102,6 +113,7 @@ function appendQuestion () {
                 //currentQuestion++
                 
                 printQuestionEl.removeChild(questionHeadline)
+                scoreTracker()
                 //correctAnswer.classList.remove('hidden')
             } else {
                 //console.log('wrong answer')
@@ -110,9 +122,9 @@ function appendQuestion () {
                 score --
                 answersArray = ''
                 questionHeadline.innerHTML = ''
+                scoreTracker()
                 //currentQuestion++
-            }
-            
+            }   
                         
         })
         possibleAnswers.appendChild(answerText)
@@ -123,7 +135,6 @@ function appendQuestion () {
 function endGame () {
    questionAndAnswerCard.classList.add('hidden')
    endGameDiv.classList.remove('hidden')
-
 }
 
 function scoreTracker  () {
@@ -131,15 +142,16 @@ function scoreTracker  () {
 
 }
 
-
-
 var setTimerText = function () {
-    timerEl.textContent = 'Time: ' + timer;
-    if (timer === 0) {
-        clearInterval(timerTick)
+    setInterval(() => {
+        timerEl.textContent = 'Time: ' + timer;
+        if (timer === 0) {
+        clearInterval(timerEl)
         return;
-    }
+        }
     timer--;
+    }, 1000);
+    
     // if statement to stop timer at 0
 }
 
